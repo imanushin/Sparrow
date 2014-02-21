@@ -3,28 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Sparrow.Web.Models;
 
 namespace Sparrow.Web.Controllers
 {
     public class DefaultController : Controller
     {
-        public ActionResult Index()
+        public new ActionResult View(string testIdentity)
         {
-            return View();
+            return base.View(new TestViewModel(testIdentity));
         }
 
-        public ActionResult About()
+        public ActionResult Edit()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return base.View();
         }
     }
 }

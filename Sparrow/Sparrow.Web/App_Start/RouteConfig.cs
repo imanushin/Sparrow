@@ -12,14 +12,14 @@ namespace Sparrow.Web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            
             routes.MapRoute(
                 name: "Default",
-                url: "{action}/{id}",
+                url: "{action}/{testIdentity}",
                 defaults: new
                 {
                     controller = "Default",
-                    action = "Index",
+                    action = "View",
                     id = UrlParameter.Optional
                 }
             );
