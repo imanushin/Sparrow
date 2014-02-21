@@ -29,7 +29,7 @@ namespace Sparrow.Web
 
             routes.MapRoute(
                 name: "Default",
-                url: "{action}/{testIdentity}",
+                url: "{testIdentity}",
                 defaults: viewDefaults
             );
         }
