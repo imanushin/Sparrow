@@ -2,7 +2,20 @@
 @{
     ViewBag.Title = @Model.Name;
 }
-<h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+@using (Html.BeginForm("SaveTest", "Default", @Model.TestIdentity))
+{
+    <table>
+        <tr>
+            <td>
+                @Html.TextBox("testEditBox", @Model.RawContents)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Save test</button>
+            </td>
+        </tr>
+    </table>
+}

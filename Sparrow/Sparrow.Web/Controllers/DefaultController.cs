@@ -11,12 +11,23 @@ namespace Sparrow.Web.Controllers
     {
         public new ActionResult View(string testIdentity)
         {
-            return View(new TestViewModel(testIdentity));
+            var model = new TestViewModel(testIdentity);
+
+            if (!model.IsExists)
+                return Redirect(RouteConfig.TestEditLink(testIdentity));
+
+            return View(model);
         }
 
         public ActionResult Edit(string testIdentity)
         {
-            return base.View(new TestViewModel(testIdentity));
+            return View(new TestViewModel(testIdentity));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public void SaveTest(string testIdentity, string testEditBox)
+        {
+            return;
         }
     }
 }
