@@ -1,6 +1,6 @@
 ﻿@model Sparrow.Web.Models.TestViewModel
 <!DOCTYPE html>
-<html>
+<html style="height: 100%">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="height: 100%">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -27,15 +27,11 @@
             </div>
         </div>
     </div>
+    
     <div class="container body-content">
-
         <h2>@Model.Name</h2>
-
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+            @RenderBody()
+        
     </div>
 
     @Scripts.Render("~/bundles/jquery")

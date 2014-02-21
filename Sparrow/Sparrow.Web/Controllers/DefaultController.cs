@@ -25,9 +25,13 @@ namespace Sparrow.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public void SaveTest(string testIdentity, string testEditBox)
+        public ActionResult SaveTest(string testIdentity, string testEditBox)
         {
-            return;
+            var model = new TestViewModel(testIdentity);
+
+            model.SaveNewTest(testEditBox);
+
+            return Redirect(RouteConfig.TestViewLink(testIdentity));
         }
     }
 }

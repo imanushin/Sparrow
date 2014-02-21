@@ -9,6 +9,7 @@ namespace Sparrow.Web.Models
     public sealed class TestViewModel
     {
         private static readonly string pathToTests = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData");
+        private readonly string absolutePath;
 
         public TestViewModel(string testIdentity)
         {
@@ -16,7 +17,7 @@ namespace Sparrow.Web.Models
             TestIdentity = testIdentity;
 
             var localTestPath = testIdentity.Replace('.', Path.PathSeparator);
-            var absolutePath = Path.Combine(pathToTests, localTestPath);
+            absolutePath = Path.Combine(pathToTests, localTestPath);
 
             IsExists = File.Exists(absolutePath);
 
@@ -45,6 +46,11 @@ namespace Sparrow.Web.Models
         {
             get;
             private set;
+        }
+
+        public void SaveNewTest(string newData)
+        {
+            File.WriteAllText(absolutePath, newData);
         }
     }
 }
