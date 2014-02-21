@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace Sparrow.Web
 {
-    public class RouteConfig
+    public static class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
@@ -15,10 +15,10 @@ namespace Sparrow.Web
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
+                url: "{action}/{id}",
                 defaults: new
                 {
-                    controller = "Home",
+                    controller = "Default",
                     action = "Index",
                     id = UrlParameter.Optional
                 }
