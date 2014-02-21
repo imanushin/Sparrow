@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@model Sparrow.Web.Models.TestViewModel
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - @Model.Name</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,13 +17,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "View", "Home", null, new { @class = "navbar-brand" })
+                <a href="https://github.com/imanushin/Sparrow" class="navbar-brand">@StringResources.ApplicationName</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "View", "Home")</li>
-                    <li>@Html.ActionLink("Edit", "Edit", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li><a href="@Url.Content(RouteConfig.TestEditLink(@Model.TestIdentity))">Edit</a></li>
+                    <li><a href="@Url.Content(RouteConfig.TestViewLink(@Model.TestIdentity))">View</a></li>
                 </ul>
             </div>
         </div>

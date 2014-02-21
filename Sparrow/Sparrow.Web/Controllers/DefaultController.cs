@@ -7,18 +7,16 @@ using Sparrow.Web.Models;
 
 namespace Sparrow.Web.Controllers
 {
-    public class DefaultController : Controller
+    public sealed class DefaultController : Controller
     {
         public new ActionResult View(string testIdentity)
         {
-            return base.View(new TestViewModel(testIdentity));
+            return View(new TestViewModel(testIdentity));
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(string testIdentity)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return base.View();
+            return base.View(new TestViewModel(testIdentity));
         }
     }
 }

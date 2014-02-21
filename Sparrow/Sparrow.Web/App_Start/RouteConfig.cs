@@ -10,6 +10,16 @@ namespace Sparrow.Web
 {
     public static class RouteConfig
     {
+        public static string TestEditLink(string testIdentifier)
+        {
+            return "/" + testIdentifier + "/Edit";
+        }
+
+        public static string TestViewLink(string testIdentifier)
+        {
+            return "/" + testIdentifier + "";
+        }
+
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -30,6 +40,12 @@ namespace Sparrow.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{testIdentity}",
+                defaults: viewDefaults
+            );
+
+            routes.MapRoute(
+                name: "FullLink",
+                url: "{testIdentity}/{action}",
                 defaults: viewDefaults
             );
         }

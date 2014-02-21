@@ -7,9 +7,16 @@ namespace Sparrow.Web.Models
 {
     public sealed class TestViewModel
     {
-        public TestViewModel(string testName)
+        public TestViewModel(string testIdentity)
         {
-            Name = testName;
+            Name = testIdentity;
+            TestIdentity = testIdentity;
+        }
+
+        public string TestIdentity
+        {
+            get;
+            private set;
         }
 
         public string Name
