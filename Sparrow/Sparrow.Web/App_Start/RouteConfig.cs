@@ -12,12 +12,12 @@ namespace Sparrow.Web
     {
         public static string TestEditLink(string testIdentifier)
         {
-            return "/" + testIdentifier + "/Edit";
+            return "~/" + testIdentifier + "/Edit";
         }
 
         public static string TestViewLink(string testIdentifier)
         {
-            return "/" + testIdentifier + "";
+            return "~/" + testIdentifier + "";
         }
 
         public static void RegisterRoutes(RouteCollection routes)
