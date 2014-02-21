@@ -6,8 +6,13 @@
 
 <form action="@Url.Action("SaveTest", "Default", @Model.TestIdentity)" method="post" style="height: 100%">
     <div style="height: 100%">
-        <textarea style="margin: 0px; width: 100%; height: 100%; padding: 3px; max-width: 100%; min-height: 200px; overflow: scroll;"
-                  id="testEditBox">@Model.RawContents</textarea>
-        </div>
+        <!--@Html.TextArea("testEditBox", new Dictionary<string, object>()
+        {
+            { "style", "margin: 0px; width: 100%; height: 100%; padding: 3px; max-width: 100%; min-height: 200px; overflow: scroll;" },
+        })-->
+        <textarea style="margin: 0px; width: 100%; height: 100%; padding: 3px; max-width: 
+    100%; min-height: 200px; overflow: scroll;"
+                  id="testEditBox" name="testEditBox">@Model.RawContents</textarea>
+    </div>
     <button type="submit">Save test</button>
 </form>
