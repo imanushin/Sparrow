@@ -1,12 +1,7 @@
-﻿@model Sparrow.Web.Models.TestViewModel
+﻿@using Sparrow.Web.Models
+@model Sparrow.Web.Models.TestViewModel
 @{
     ViewBag.Title = @Model.Name;
 }
 
-<table>
-    <tr>
-        <td>
-            @Model.RawContents
-        </td>
-    </tr>
-</table>
+@Html.Raw(@TestDataParser.ConvertToHtml(@Model.RawContents))
