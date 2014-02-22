@@ -16,8 +16,11 @@ namespace Sparrow.Web.Controllers
 
         private static readonly ConcurrentDictionary<Guid, ExecutingTestData> tests = new ConcurrentDictionary<Guid, ExecutingTestData>();
 
-        public static void StartTest(string test)
+        public static void StartTest(string testIdentity)
         {
+            var test = new TestViewModel(testIdentity);
+
+            
         }
     }
 }
