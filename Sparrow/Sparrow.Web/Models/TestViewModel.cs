@@ -7,17 +7,15 @@ using System.Web.UI.WebControls;
 
 namespace Sparrow.Web.Models
 {
-    public sealed class TestViewModel
+    public sealed class TestViewModel : BaseTestViewModel
     {
         private static readonly string pathToTests = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData");
         private readonly string absolutePath;
         private readonly string contentsPath;
 
         public TestViewModel(string testIdentity)
+            :base(testIdentity)
         {
-            Name = testIdentity;
-            TestIdentity = testIdentity;
-
             var localTestPath = testIdentity.Replace('.', Path.PathSeparator);
             absolutePath = Path.Combine(pathToTests, localTestPath);
             contentsPath = Path.Combine(absolutePath, "contents.txt");
@@ -27,25 +25,13 @@ namespace Sparrow.Web.Models
             RawContents = IsExists ? File.ReadAllText(contentsPath) : string.Empty;
         }
 
-        public bool IsExists
-        {
-            get;
-            private set;
-        }
-
-        public string TestIdentity
-        {
-            get;
-            private set;
-        }
-
-        public string Name
-        {
-            get;
-            private set;
-        }
-
         public string RawContents
+        {
+            get;
+            private set;
+        }
+
+        public bool IsExists
         {
             get;
             private set;

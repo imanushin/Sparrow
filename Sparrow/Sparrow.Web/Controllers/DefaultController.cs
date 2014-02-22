@@ -24,6 +24,11 @@ namespace Sparrow.Web.Controllers
             return View(new TestViewModel(testIdentity));
         }
 
+        public ActionResult TestExecute(string testIdentity)
+        {
+            return View(new TestExecuteModel(testIdentity));
+        }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult SaveTest(string testIdentity, string testEditBox)
         {

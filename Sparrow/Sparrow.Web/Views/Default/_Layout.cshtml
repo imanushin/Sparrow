@@ -1,4 +1,4 @@
-﻿@model Sparrow.Web.Models.TestViewModel
+﻿@model Sparrow.Web.Models.BaseTestViewModel
 <!DOCTYPE html>
 <html style="height: 100%">
 <head>
@@ -23,6 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="@Url.Content(RouteConfig.TestEditLink(@Model.TestIdentity))">Edit</a></li>
                     <li><a href="@Url.Content(RouteConfig.TestViewLink(@Model.TestIdentity))">View</a></li>
+                    <li><a href="@Url.Content(RouteConfig.TestViewLink(@Model.TestIdentity))">Test</a></li>
                 </ul>
             </div>
         </div>
