@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Web", "Sparrow.Web\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.Internal", "Sparrow.Internal\Sparrow.Internal.csproj", "{3A834725-D1D5-41F6-9AD6-E7A70409FFB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sparrow.External", "Sparrow.External\Sparrow.External.csproj", "{402C7F88-856D-40DA-BCF0-4EFAF4A93EA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3A834725-D1D5-41F6-9AD6-E7A70409FFB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A834725-D1D5-41F6-9AD6-E7A70409FFB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A834725-D1D5-41F6-9AD6-E7A70409FFB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{402C7F88-856D-40DA-BCF0-4EFAF4A93EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{402C7F88-856D-40DA-BCF0-4EFAF4A93EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{402C7F88-856D-40DA-BCF0-4EFAF4A93EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{402C7F88-856D-40DA-BCF0-4EFAF4A93EA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

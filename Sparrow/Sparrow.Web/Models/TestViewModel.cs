@@ -14,9 +14,9 @@ namespace Sparrow.Web.Models
         private readonly string contentsPath;
 
         public TestViewModel(string testIdentity)
-            :base(testIdentity)
+            : base(testIdentity)
         {
-            var localTestPath = testIdentity.Replace('.', Path.PathSeparator);
+            var localTestPath = PathToTestFolder(testIdentity);
             absolutePath = Path.Combine(pathToTests, localTestPath);
             contentsPath = Path.Combine(absolutePath, "contents.txt");
 
@@ -43,6 +43,11 @@ namespace Sparrow.Web.Models
                 Directory.CreateDirectory(absolutePath);
 
             File.WriteAllText(contentsPath, newData);
+        }
+
+        public static string PathToTestFolder(string testIdentity)
+        {
+            return testIdentity.Replace('.', Path.PathSeparator);
         }
     }
 }

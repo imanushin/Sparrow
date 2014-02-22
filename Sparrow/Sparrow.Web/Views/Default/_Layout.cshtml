@@ -23,16 +23,16 @@
                 <ul class="nav navbar-nav">
                     <li><a href="@Url.Content(RouteConfig.TestEditLink(@Model.TestIdentity))">Edit</a></li>
                     <li><a href="@Url.Content(RouteConfig.TestViewLink(@Model.TestIdentity))">View</a></li>
-                    <li><a href="@Url.Content(RouteConfig.TestViewLink(@Model.TestIdentity))">Test</a></li>
+                    <li>@Html.ActionLink("Test", "StartTestExecuting", "Default", @Model.TestIdentity)</li>
                 </ul>
             </div>
         </div>
     </div>
-    
+
     <div class="container body-content">
         <h2>@Model.Name</h2>
-            @RenderBody()
-        
+        @RenderBody()
+
     </div>
 
     @Scripts.Render("~/bundles/jquery")

@@ -16,7 +16,7 @@ namespace Sparrow.Web.Controllers
             if (!model.IsExists)
                 return Redirect(RouteConfig.TestEditLink(testIdentity));
 
-            return View(model);
+            return View("View", model);
         }
 
         public ActionResult Edit(string testIdentity)
@@ -26,7 +26,19 @@ namespace Sparrow.Web.Controllers
 
         public ActionResult TestExecute(string testIdentity)
         {
-            return View(new TestExecuteModel(testIdentity));
+            var lastExecuted = TestExecuteModel.FindLastExecuted(testIdentity);
+
+            if (lastExecuted == null)
+                return View(testIdentity);
+
+            return View("TestExecute", lastExecuted);
+        }
+
+        public ActionResult StartTestExecuting(string testIdentity)
+        {
+            TestExecutor.StartTest(testIdentity);
+
+            return TestExecute(testIdentity);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

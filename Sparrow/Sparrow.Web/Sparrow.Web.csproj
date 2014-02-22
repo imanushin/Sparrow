@@ -127,6 +127,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\TestExecutor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +196,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Sparrow.External\Sparrow.External.csproj">
+      <Project>{402C7F88-856D-40DA-BCF0-4EFAF4A93EA6}</Project>
+      <Name>Sparrow.External</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sparrow.Internal\Sparrow.Internal.csproj">
       <Project>{3A834725-D1D5-41F6-9AD6-E7A70409FFB5}</Project>
       <Name>Sparrow.Internal</Name>
