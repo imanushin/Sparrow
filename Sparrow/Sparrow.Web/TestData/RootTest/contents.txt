@@ -1,0 +1,3 @@
+!define testVariable => c:\Windows
+
+| check path | '${testVariable}' |

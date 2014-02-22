@@ -4,4 +4,12 @@
     ViewBag.Title = @Model.Name;
 }
 
-@Html.Raw(@TestDataParser.ConvertToHtml(@Model.RawContents))
+<table>
+    @foreach (var item in TestDataParser.ConvertToHtml(@Model.RawContents))
+    {
+        <tr style="min-height: 22px;">
+            <td>@Html.Raw(@item.Html)</td>
+        </tr>
+    }
+
+</table>

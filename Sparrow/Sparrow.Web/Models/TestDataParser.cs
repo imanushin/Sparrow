@@ -3,103 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using Sparrow.Web.Models.TestEntry;
 
 namespace Sparrow.Web.Models
 {
     public static class TestDataParser
     {
-        public static string ConvertToHtml(string testRawData)
+        public static IReadOnlyList<BaseTestItem> ConvertToHtml(string testRawData)
         {
             var lines = testRawData.Split('\n').Select(s => s.Trim()).ToArray();
 
-            var result = new StringBuilder();
+            var result = new List<BaseTestItem>();
 
-            result.AppendLine(@"<table>");
-            
+            var variables = new VariablesStore();
+
+            var previousRows = new List<RowTestItem>();
+
             for (int lineIndex = 0; lineIndex < lines.Length; lineIndex++)
             {
-                result.AppendLine(@"<tr style=""min-width: 22px;""><td>");
-
                 string currentLine = lines[lineIndex];
 
-                if (currentLine.StartsWith("!"))
+                var defineItem = DefineTestItem.TryParse(currentLine, variables);
+
+                var rowItem = RowTestItem.TryParse(currentLine, variables);
+
+                if (rowItem != null)
                 {
-                    result.AppendLine(currentLine);
+                    previousRows.Add(rowItem);
+
+                    continue;
+                }
+                
+                if (previousRows.Any())
+                {
+                    result.Add(new TableTestItem(previousRows));
+                    previousRows.Clear();
 
                     continue;
                 }
 
-                if (currentLine.StartsWith("|"))
+                if (defineItem != null)
                 {
-                    var tableHeight = GetTableHeight(lines, lineIndex);
+                    result.Add(defineItem);
 
-                    result.AppendLine(ParseTable(lines, lineIndex, tableHeight));
-
-                    lineIndex += tableHeight;
+                    continue;
                 }
 
-                result.AppendLine("</td></tr>");
+                result.Add(new UnknownTestItem(currentLine));
             }
 
-            result.AppendLine("</table>");
-
-            return result.ToString();
-        }
-
-        private static string ParseTable(string[] lines, int lineIndex, int tableHeight)
-        {
-            var result = new StringBuilder();
-
-            result.AppendLine(@"<table border=""1"">");
-
-            for (int currentLine = lineIndex; currentLine < lineIndex + tableHeight; currentLine++)
-            {
-                result.AppendLine("<tr>");
-
-                result.AppendLine(RowToHtml(lines[currentLine]));
-
-                result.AppendLine("</tr>");
-            }
-
-            result.AppendLine("</table>");
-
-            return result.ToString();
-        }
-
-        private static string RowToHtml(string line)
-        {
-            var sections = line.Substring(1, line.Length - 2).Split('|').Select(s => s.Trim());
-
-            var result = new StringBuilder();
-
-            foreach (string section in sections)
-            {
-                result.Append(@"<td>");
-
-                if (section.StartsWith("'") && section.EndsWith("'"))
-                {
-                    result.Append("<b>");
-                    result.Append(section.Substring(1, section.Length - 1));
-                    result.Append("</b>");
-                }
-                else
-                {
-                    result.Append(section);
-                }
-                result.Append("</td>");
-            }
-
-            return result.ToString();
-        }
-
-        private static int GetTableHeight(string[] lines, int startIndex)
-        {
-            var result = 1;
-
-            while (result + startIndex < lines.Length && lines[startIndex + result].StartsWith("|"))
-            {
-                result++;
-            }
+            if (previousRows.Any())
+                result.Add(new TableTestItem(previousRows));
 
             return result;
         }
