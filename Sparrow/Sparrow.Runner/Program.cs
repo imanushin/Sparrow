@@ -11,7 +11,7 @@ namespace Sparrow.Runner
     {
         private static void Main(string[] args)
         {
-            Debugger.Break();
+            Debugger.Launch();
 
             if (args.Length < 2)
             {
