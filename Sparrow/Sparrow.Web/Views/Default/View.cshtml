@@ -5,7 +5,7 @@
 }
 
 <table>
-    @foreach (var item in TestDataParser.ConvertToHtml(@Model.RawContents))
+    @foreach (var item in TestDataParser.GetTestSteps(@Model.RawContents))
     {
         <tr style="min-height: 22px;">
             <td>@Html.Raw(@item.Html)</td>

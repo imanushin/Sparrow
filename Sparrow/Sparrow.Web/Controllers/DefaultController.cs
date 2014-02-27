@@ -36,9 +36,14 @@ namespace Sparrow.Web.Controllers
 
         public ActionResult StartTestExecuting(string testIdentity)
         {
-            TestExecutor.StartTest(testIdentity);
+            var startData = TestExecutor.StartTest(testIdentity);
 
-            return TestExecute(testIdentity);
+            return TestExecute(testIdentity, startData.ExecutionId);
+        }
+
+        private ActionResult TestExecute(string testIdentity, long executionId)
+        {
+            return View("TestExecute", new TestExecuteModel(testIdentity,executionId));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

@@ -9,7 +9,7 @@ namespace Sparrow.Web.Models
 {
     public static class TestDataParser
     {
-        public static IReadOnlyList<BaseTestItem> ConvertToHtml(string testRawData)
+        public static IReadOnlyList<BaseTestItem> GetTestSteps(string testRawData)
         {
             var lines = testRawData.Split('\n').Select(s => s.Trim()).ToArray();
 

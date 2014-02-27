@@ -4,13 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using Sparrow.External.Properties;
+using Sparrow.Web.Controllers;
 
 namespace Sparrow.Web.Models
 {
     public sealed class TestExecuteModel : BaseTestViewModel
     {
-        private const string historySubfolder = "_history";
-
         public TestExecuteModel(string testIdentity, long executionTick)
             : base(testIdentity)
         {
@@ -28,12 +27,12 @@ namespace Sparrow.Web.Models
         {
             var testFolder = TestViewModel.PathToTestFolder(testIdentity);
 
-            var historyFolder = Path.Combine(testFolder, historySubfolder);
+            var historyFolder = Path.Combine(testFolder, ExecutingTestData.HistorySubfolder);
 
             if (!Directory.Exists(historyFolder))
                 return null;
 
-            var historyFiles = Directory.GetFiles(historyFolder, "*.history", SearchOption.TopDirectoryOnly).ToList();
+            var historyFiles = Directory.GetFiles(historyFolder, "*" + ExecutingTestData.HistoryFileExtension, SearchOption.TopDirectoryOnly).ToList();
 
             var times = new List<long>();
 

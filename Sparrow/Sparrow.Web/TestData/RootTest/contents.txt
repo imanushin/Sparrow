@@ -1,3 +1,4 @@
 !define testVariable => c:\Windows
+!define RUNNER_PATH => C:\git\Sparrow\Sparrow\Sparrow.Runner\bin\Debug
 
 | check path | '${testVariable}' |
