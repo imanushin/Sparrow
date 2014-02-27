@@ -9,7 +9,7 @@ namespace Sparrow.Runner
 {
     internal static class Program
     {
-        private static void Main(string[] args)
+        private static int Main(string[] args)
         {
             Debugger.Launch();
 
@@ -18,8 +18,22 @@ namespace Sparrow.Runner
                 throw new InvalidOperationException(string.Format("Wrong argument count. Please add following arguments: pathToExecutableController and test execution identity"));
             }
 
-            var pathToApiRoot = args[0];
-            var executionId = args[1];
+            try
+            {
+                var pathToApiRoot = args[0];
+                var executionId = args[1];
+
+                var requester = new HttpRequester(pathToApiRoot, executionId);
+
+                var libPath = requester.GetLibraryPath();
+
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                return 1;
+            }
+
         }
     }
 }
