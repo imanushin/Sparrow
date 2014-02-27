@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Sparrow.Web.Models;
 
 namespace Sparrow.Web.Controllers
@@ -26,6 +27,13 @@ namespace Sparrow.Web.Controllers
 
         public ActionResult TestExecute(string testIdentity)
         {
+            var executionId = Request.Params["executionId"];
+
+            if (!string.IsNullOrWhiteSpace(executionId))
+            {
+                return View("TestExecute", new TestExecuteModel(testIdentity, long.Parse(executionId)));
+            }
+
             var lastExecuted = TestExecuteModel.FindLastExecuted(testIdentity);
 
             if (lastExecuted == null)
@@ -38,12 +46,11 @@ namespace Sparrow.Web.Controllers
         {
             var startData = TestExecutor.StartTest(testIdentity);
 
-            return TestExecute(testIdentity, startData.ExecutionId);
-        }
-
-        private ActionResult TestExecute(string testIdentity, long executionId)
-        {
-            return View("TestExecute", new TestExecuteModel(testIdentity,executionId));
+            return RedirectToAction("TestExecute", new RouteValueDictionary()
+            {
+                {"testIdentity", testIdentity},
+                {"executionId", startData.ExecutionId},
+            });
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
