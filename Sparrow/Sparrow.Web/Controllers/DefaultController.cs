@@ -44,7 +44,7 @@ namespace Sparrow.Web.Controllers
 
         public ActionResult StartTestExecuting(string testIdentity)
         {
-            var startData = TestExecutor.StartTest(testIdentity);
+            var startData = TestExecutor.StartTest(testIdentity, this.ControllerContext);
 
             return RedirectToAction("TestExecute", new RouteValueDictionary()
             {

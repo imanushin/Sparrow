@@ -5,7 +5,10 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 using Sparrow.External;
 using Sparrow.Web.Models;
 using Sparrow.Web.Models.TestEntry;
@@ -17,7 +20,7 @@ namespace Sparrow.Web.Controllers
         private static readonly ConcurrentDictionary<Guid, ExecutingTestData> tests = new ConcurrentDictionary<Guid, ExecutingTestData>();
         private const string runnerPathVariableName = "RUNNER_PATH";
 
-        public static ExecutingTestData StartTest(string testIdentity)
+        public static ExecutingTestData StartTest(string testIdentity, ControllerContext controllerContext)
         {
             var test = new TestViewModel(testIdentity);
 
@@ -41,10 +44,11 @@ namespace Sparrow.Web.Controllers
             var runIdentity = Guid.NewGuid();
 
             var startInfo = new ProcessStartInfo(pathToRunner);
-            
 
-
-            startInfo.Arguments = string.Format("{0} {1}", "", runIdentity);
+            startInfo.Arguments = string.Format(
+                @"""{0}"" ""{1}""", 
+                WebApiConfig.GetExecutionControllerRoot(controllerContext), 
+                runIdentity);
 
             var process = new Process()
             {

@@ -14,9 +14,9 @@ namespace Sparrow.Web.Controllers
         public const string HistorySubfolder = "_history";
         public const string HistoryFileExtension = ".history";
 
-        private const string TestContainerVariableName = "TEST_CONTAINER";
+        private const string testContainerVariableName = "TEST_CONTAINER";
 
-        private IReadOnlyList<BaseTestItem> testSteps;
+        private readonly IReadOnlyList<BaseTestItem> testSteps;
 
         public ExecutingTestData(Guid runIdentity, string testIdentity, Process process)
         {
@@ -25,7 +25,7 @@ namespace Sparrow.Web.Controllers
             RunningProcess = process;
             ExecutionId = DateTime.UtcNow.Ticks;
 
-            string pathToTest = TestViewModel.PathToTestFolder(testIdentity);
+            string pathToTest = TestViewModel.PathToContents(testIdentity);
 
             testSteps = TestDataParser.GetTestSteps(File.ReadAllText(pathToTest));
 
@@ -77,9 +77,9 @@ namespace Sparrow.Web.Controllers
         {
             get
             {
-                var testLibraryVariables = testSteps.OfType<DefineTestItem>().Where(d => string.Equals(d.VariableName, TestContainerVariableName, StringComparison.OrdinalIgnoreCase)).ToArray();
+                var testLibraryVariables = testSteps.OfType<DefineTestItem>().Where(d => string.Equals(d.VariableName, testContainerVariableName, StringComparison.OrdinalIgnoreCase)).ToArray();
 
-                Validate.CollectionHasElements(testLibraryVariables, "Unable to find path to the library with tests. Please define variable {0} and put path to the test container", TestContainerVariableName);
+                Validate.CollectionHasElements(testLibraryVariables, "Unable to find path to the library with tests. Please define variable {0} and put path to the test container", testContainerVariableName);
 
                 var result = string.Join(";", testLibraryVariables.Select(v => v.VariableContent));
 

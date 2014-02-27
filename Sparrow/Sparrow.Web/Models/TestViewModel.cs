@@ -16,9 +16,8 @@ namespace Sparrow.Web.Models
         public TestViewModel(string testIdentity)
             : base(testIdentity)
         {
-            var localTestPath = PathToTestFolder(testIdentity);
-            absolutePath = Path.Combine(pathToTests, localTestPath);
-            contentsPath = Path.Combine(absolutePath, "contents.txt");
+            absolutePath = PathToTestFolder(testIdentity);
+            contentsPath = PathToContents(testIdentity);
 
             IsExists = File.Exists(contentsPath);
 
@@ -47,7 +46,14 @@ namespace Sparrow.Web.Models
 
         public static string PathToTestFolder(string testIdentity)
         {
-            return testIdentity.Replace('.', Path.PathSeparator);
+            var localTestPath = testIdentity.Replace('.', Path.PathSeparator);
+
+            return Path.Combine(pathToTests, localTestPath);
+        }
+
+        public static string PathToContents(string testIdentity)
+        {
+            return Path.Combine(PathToTestFolder(testIdentity), "contents.txt");
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Sparrow.Web.Controllers
     public sealed class ExecutionController : ApiController
     {
         [HttpGet]
-        public string GetLibraryPath(Guid id)
+        public string GetLibraryPath(Guid executionId)
         {
-            var test = TestExecutor.GetData(id);
+            var test = TestExecutor.GetData(executionId);
 
             return test.LibraryPath;
         }
