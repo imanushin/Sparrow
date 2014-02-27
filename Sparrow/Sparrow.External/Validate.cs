@@ -23,5 +23,11 @@ namespace Sparrow.External
             if (!condition)
                 throw new InvalidOperationException(string.Format(messageFormat, args));
         }
+
+        public static void CollectionHasElements<TValue>(IEnumerable<TValue> collection, string messageFormat, params object[] args)
+        {
+            IsNotNull(collection, "Collection {0} should not be null", typeof(TValue).Name);
+            Condition(collection.Any(), messageFormat, args);
+        }
     }
 }

@@ -16,11 +16,11 @@ namespace Sparrow.Web
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            // Map this rule first
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+                 "WithActionApi",
+                 "api/{controller}/{action}/{id}"
+             );
         }
     }
 }

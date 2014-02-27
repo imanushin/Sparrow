@@ -41,6 +41,8 @@ namespace Sparrow.Web.Controllers
             var runIdentity = Guid.NewGuid();
 
             var startInfo = new ProcessStartInfo(pathToRunner);
+            
+
 
             startInfo.Arguments = string.Format("{0} {1}", "", runIdentity);
 
@@ -58,6 +60,17 @@ namespace Sparrow.Web.Controllers
             process.Start();
 
             return data;
+        }
+
+        public static ExecutingTestData GetData(Guid executionId)
+        {
+            ExecutingTestData result;
+
+            tests.TryGetValue(executionId, out result);
+
+            Validate.IsNotNull(result, "Unable to find execution test for key {0}", executionId);
+
+            return result;
         }
     }
 }

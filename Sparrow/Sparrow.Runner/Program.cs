@@ -10,6 +10,8 @@ namespace Sparrow.Runner
     {
         private static void Main(string[] args)
         {
+            var pathToApiRoot = args[0];
+            var executionId = args[1];
         }
     }
 }
